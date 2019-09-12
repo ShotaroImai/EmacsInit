@@ -10,6 +10,17 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+;;ウインドウサイズ
+(setq initial-frame-alist
+      '((top . 80) (left . 50) (width . 130) (height . 40)))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Ricty Discord" :foundry "PfEd" :slant normal :weight normal :height 136 :width normal)))))
+
 ;; use-packageをインストールする
 (straight-use-package 'use-package)
 ;; オプションなしで自動的にuse-packageをstraight.elにフォールバックする
@@ -17,9 +28,17 @@
 (setq straight-use-package-by-default t)
 ;; init-loader
 (use-package init-loader)
-
 ;; ~/.emacs.d/inits配下のelファイルをすべてロードする
 (init-loader-load "~/.emacs.d/init")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(current-language-environment "Japanese")
+ ;;; ログはエラーが出た時のみ
+ '(init-loader-show-log-after-init (quote error-only)))
+
 
 ;; ;; read uim.el
 ;; (require 'uim)
@@ -37,24 +56,3 @@
 ;(setq uim-candidate-display-inline t)
 ;; (straight-use-package 'ibus)
 ;; (add-hook 'after-init-hook 'ibus-mode-on)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(current-language-environment "Japanese")
- ;;; ログはエラーが出た時のみ
- '(init-loader-show-log-after-init (quote error-only)))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Ricty Discord" :foundry "PfEd" :slant normal :weight normal :height 136 :width normal)))))
-
-;;ウインドウサイズ
-(setq initial-frame-alist
-      '((top . 5) (left . 5) (width . 120) (height . 40)))
-
