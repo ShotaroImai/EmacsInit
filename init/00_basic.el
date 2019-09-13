@@ -1,10 +1,7 @@
 ;;; 基本的設定を色々書く
 ;; スタートアップメッセージを表示させない
 (setq inhibit-startup-message 1)
-(straight-use-package 'linum+) ;;左に行番号表示
-(global-linum-mode)
-(column-number-mode t) ;; 列番号の表示
-(line-number-mode t) ;; 行番号の表示
+;(straight-use-package 'linum+) ;;左に行番号表示
 (setq transient-mark-mode t) ;;リージョンに色をつける
 ;;; *.~ とかのバックアップファイルを作らない
 (setq make-backup-files nil)
@@ -27,8 +24,8 @@
 (setq ring-bell-function 'ignore)
 
 ;;自動バイトコンパイル
-(straight-use-package 'auto-async-byte-compile)
-(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+;; (straight-use-package 'auto-async-byte-compile)
+;; (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
 ;;自動で使わないバッファを消す
 (straight-use-package 'tempbuf)

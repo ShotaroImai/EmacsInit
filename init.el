@@ -35,9 +35,19 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(avy-migemo-function-names
+   (quote
+    (swiper--add-overlays-migemo
+     (swiper--re-builder :around swiper--re-builder-migemo-around)
+     (ivy--regex :around ivy--regex-migemo-around)
+     (ivy--regex-ignore-order :around ivy--regex-ignore-order-migemo-around)
+     (ivy--regex-plus :around ivy--regex-plus-migemo-around)
+     ivy--highlight-default-migemo ivy-occur-revert-buffer-migemo ivy-occur-press-migemo avy-migemo-goto-char avy-migemo-goto-char-2 avy-migemo-goto-char-in-line avy-migemo-goto-char-timer avy-migemo-goto-subword-1 avy-migemo-goto-word-1 avy-migemo-isearch avy-migemo-org-goto-heading-timer avy-migemo--overlay-at avy-migemo--overlay-at-full)))
+ '(column-number-mode t)
  '(current-language-environment "Japanese")
- ;;; ログはエラーが出た時のみ
- '(init-loader-show-log-after-init (quote error-only)))
+ '(init-loader-show-log-after-init (quote error-only))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
 
 
 ;; ;; read uim.el
@@ -54,5 +64,3 @@
 ;;                    uim-lang-code-alist)))
 ;インライン変換表示
 ;(setq uim-candidate-display-inline t)
-;; (straight-use-package 'ibus)
-;; (add-hook 'after-init-hook 'ibus-mode-on)
