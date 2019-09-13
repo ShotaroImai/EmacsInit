@@ -1,7 +1,7 @@
+;; git-gutter-fringe
+(global-git-gutter-mode 1)
 (straight-use-package 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
-
-(straight-use-package 'undo-tree)
-(straight-use-package 'dired+)
-
+;; ファイル編集時に，bufferを再読込
+(global-auto-revert-mode 1)
