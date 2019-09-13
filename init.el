@@ -10,6 +10,9 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+;;言語環境
+(set-language-environment "Japanese")           ; 言語環境を"japanese"に
+(prefer-coding-system 'utf-8)                   ; デフォルトの文字コードをUTF-8に
 ;;ウインドウサイズ
 (setq initial-frame-alist
       '((top . 80) (left . 50) (width . 130) (height . 40)))
@@ -28,6 +31,7 @@
 (setq straight-use-package-by-default t)
 ;; init-loader
 (use-package init-loader)
+(setq init-loader-show-log-after-init 'error-only);;エラーのときだけログを出す
 ;; ~/.emacs.d/inits配下のelファイルをすべてロードする
 (init-loader-load "~/.emacs.d/init")
 (custom-set-variables
@@ -44,8 +48,7 @@
      (ivy--regex-plus :around ivy--regex-plus-migemo-around)
      ivy--highlight-default-migemo ivy-occur-revert-buffer-migemo ivy-occur-press-migemo avy-migemo-goto-char avy-migemo-goto-char-2 avy-migemo-goto-char-in-line avy-migemo-goto-char-timer avy-migemo-goto-subword-1 avy-migemo-goto-word-1 avy-migemo-isearch avy-migemo-org-goto-heading-timer avy-migemo--overlay-at avy-migemo--overlay-at-full)))
  '(column-number-mode t)
- '(current-language-environment "Japanese")
- '(init-loader-show-log-after-init (quote error-only))
+ '(global-display-line-numbers-mode t)
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 

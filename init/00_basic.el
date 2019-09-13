@@ -1,7 +1,6 @@
 ;;; 基本的設定を色々書く
 ;; スタートアップメッセージを表示させない
 (setq inhibit-startup-message 1)
-;(straight-use-package 'linum+) ;;左に行番号表示
 (setq transient-mark-mode t) ;;リージョンに色をつける
 ;;; *.~ とかのバックアップファイルを作らない
 (setq make-backup-files nil)
@@ -91,13 +90,6 @@
 (avy-migemo-mode 1)
 (require 'avy-migemo-e.g.swiper)
 
-;;undo-tree
-(straight-use-package 'undo-tree)
-;; undo-tree を起動時に有効にする
-(global-undo-tree-mode t)
-;; M-/ をredo に設定する。
-(global-set-key (kbd "M-/") 'undo-tree-redo)
-
 ;;dired+
 (straight-use-package 'dired+)
 ;;Diredモードのときにrでリネームできる
@@ -106,8 +98,15 @@
 
 ;;redo+
 (straight-use-package 'redo+)
-(global-set-key (kbd "C-M-/") 'redo) ;;C-M-/でredo
 (setq undo-no-redo t) ;;過去のundoがredoされないようにする
 ;;大量のundoに耐えられるように
 (setq undo-limit 10000)
 (setq undo-strong-limit 1000)
+
+;;undo-tree
+;;C-u xでundo-treeを開く
+(straight-use-package 'undo-tree)
+;; undo-tree を起動時に有効にする
+(global-undo-tree-mode t)
+;; M-/ をredo に設定する。
+(global-set-key (kbd "M-/") 'undo-tree-redo)
