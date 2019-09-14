@@ -62,10 +62,11 @@
 ;;; と聞いてくる。
 (setq sml/no-confirm-load-theme t)
 ;テーマ
+(straight-use-package 'smart-mode-line-atom-one-dark-theme)
 (setq sml/theme 'atom-one-dark)
+;(sml/apply-theme 'respectful)
 ;(sml/shorten-modes nil)
 (sml/setup)
-;(sml/apply-theme 'respectful)
 ;;; その他のthemeを設定
 ;;(sml/apply-theme 'dark)
 ;;(sml/apply-theme 'light)
