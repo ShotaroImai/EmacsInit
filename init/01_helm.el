@@ -18,3 +18,60 @@
       helm-recentf-fuzzy-match    t)
 (setq helm-semantic-fuzzy-match t
       helm-imenu-fuzzy-match    t)
+
+(straight-use-package 'company)
+(global-company-mode)
+(setq company-transformers '(company-sort-by-backend-importance))
+(setq company-idle-delay 0)
+(setq company-minimum-prefix-length 3)
+(setq company-selection-wrap-around t)
+(setq completion-ignore-case t)
+(setq company-dabbrev-downcase nil)
+(global-set-key (kbd "C-M-i") 'company-complete)
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(define-key company-search-map (kbd "C-n") 'company-select-next)
+(define-key company-search-map (kbd "C-p") 'company-select-previous)
+(define-key company-active-map (kbd "C-s") 'company-filter-candidates)
+(define-key company-active-map (kbd "C-i") 'company-complete-selection)
+(define-key company-active-map [tab] 'company-complete-selection)
+(define-key company-active-map (kbd "C-f") 'company-complete-selection)
+(define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete)
+
+
+(straight-use-package 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+(straight-use-package 'migemo)
+(straight-use-package 'helm-migemo)
+(setq migemo-command "cmigemo")
+(setq migemo-options '("-q" "--emacs"))
+(setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")
+(setq migemo-user-dictionary nil)
+(setq migemo-regex-dictionary nil)
+(setq migemo-coding-system 'utf-8-unix)
+(load-library "migemo")
+(migemo-init)
+
+;(global-set-key "\C-s" 'swiper)
+(defvar swiper-include-line-number-in-search t)
+(straight-use-package 'avy)
+(straight-use-package 'swiper-helm)
+(straight-use-package 'avy-migemo)
+(avy-migemo-mode 1)
+(require 'avy-migemo-e.g.swiper)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(avy-migemo-function-names
+   (quote
+    (swiper--add-overlays-migemo
+     (swiper--re-builder :around swiper--re-builder-migemo-around)
+     (ivy--regex :around ivy--regex-migemo-around)
+     (ivy--regex-ignore-order :around ivy--regex-ignore-order-migemo-around)
+     (ivy--regex-plus :around ivy--regex-plus-migemo-around)
+     ivy--highlight-default-migemo ivy-occur-revert-buffer-migemo ivy-occur-press-migemo avy-migemo-goto-char avy-migemo-goto-char-2 avy-migemo-goto-char-in-line avy-migemo-goto-char-timer avy-migemo-goto-subword-1 avy-migemo-goto-word-1 avy-migemo-isearch avy-migemo-org-goto-heading-timer avy-migemo--overlay-at avy-migemo--overlay-at-full)))
+)
