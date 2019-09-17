@@ -58,4 +58,3 @@
 (setq init-loader-show-log-after-init 'error-only);;エラーのときだけログを出す
 ;; ~/.emacs.d/inits配下のelファイルをすべてロードする
 (init-loader-load "~/.emacs.d/init")
-
