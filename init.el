@@ -32,10 +32,15 @@
 ;;言語環境
 (set-language-environment "Japanese")           ; 言語環境を"japanese"に
 (prefer-coding-system 'utf-8)                   ; デフォルトの文字コードをUTF-8に
-;; uim.elを読み込みEmacsへIMを登録する
-;(require 'uim-leim)
+
 ;; read uim.el
 (require 'uim)
+;; uim.elを読み込みEmacsへIMを登録する
+;(require 'uim-leim)
+;;デフォルトをskkのひらがなモードへ
+(setq default-input-method "japanese-skk-uim")
+(setq uim-default-im-prop
+      '("action_skk_hiragana"))
 ;; uncomment next and comment out previous to load uim.el on-demand
 ;(autoload 'uim-mode "uim" nil t)
 ;; key-binding for activate uim (ex. C-\)

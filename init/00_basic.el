@@ -46,27 +46,27 @@
 (diminish-major-mode 'emacs-lisp-mode-hook "Elisp")
 
 ;;smart-mode-lineの設定
-(straight-use-package 'smart-mode-line)
+;(straight-use-package 'smart-mode-line)
 ;;; この変数を定義しておかないとエラーになるバグあり
 ;(setq sml/active-background-color "gray60")
 ;パーセンテージ表示消す
-(setq sml/position-percentage-format "")
+;(setq sml/position-percentage-format "")
 ;;; 読み込み専用バッファは%で表示
-(setq sml/read-only-char "%%")
+;(setq sml/read-only-char "%%")
 ;;; 修正済みバッファは*で表示
-(setq sml/modified-char "*")
+;(setq sml/modified-char "*")
 ;;; これがないと表示がはみでる
-(setq sml/extra-filler -10)
+;(setq sml/extra-filler -10)
 ;;; これを入れないとsmart-mode-lineを読み込むたびに
 ;;; Loading a theme can run Lisp code.  Really load? (y or n)
 ;;; と聞いてくる。
-(setq sml/no-confirm-load-theme t)
+;(setq sml/no-confirm-load-theme t)
 ;テーマ
-(straight-use-package 'smart-mode-line-atom-one-dark-theme)
-(setq sml/theme 'atom-one-dark)
+;(straight-use-package 'smart-mode-line-atom-one-dark-theme)
+;(setq sml/theme 'atom-one-dark)
 ;(sml/apply-theme 'respectful)
 ;(sml/shorten-modes nil)
-(sml/setup)
+;(sml/setup)
 ;;; その他のthemeを設定
 ;;(sml/apply-theme 'dark)
 ;;(sml/apply-theme 'light)
