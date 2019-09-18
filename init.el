@@ -20,7 +20,8 @@
 (load-theme 'atom-one-dark t)
 ;;ウインドウサイズ
 (setq initial-frame-alist
-      '((top . 80) (left . 50) (width . 130) (height . 40)))
+      '((top . 35) (left .45) (width . 130) (height . 40)))
+;80 50
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -34,10 +35,13 @@
 (prefer-coding-system 'utf-8)                   ; デフォルトの文字コードをUTF-8に
 
 ;; read uim.el
-(require 'uim)
+;(require 'uim)
+;Ubuntuで配布しているuim-elはemacs26では不具合(uim-modeがオンになるとC-xが無効になる)なので、githubから直接落と
+(straight-use-package '(uim :local-repo "uim/emacs"))
 ;; uim.elを読み込みEmacsへIMを登録する
 ;(require 'uim-leim)
 ;;デフォルトをskkのひらがなモードへ
+(setq uim-default-im-engine "skk")
 (setq default-input-method "japanese-skk-uim")
 (setq uim-default-im-prop
       '("action_skk_hiragana"))
@@ -45,12 +49,12 @@
 ;(autoload 'uim-mode "uim" nil t)
 ;; key-binding for activate uim (ex. C-\)
 (global-set-key "\C-\\" 'uim-mode)
-;; Set UTF-8 as preferred character encoding (default is euc-jp).
-(setq uim-lang-code-alist
-      (cons '("Japanese" "Japanese" utf-8 "UTF-8")
-           (delete (assoc "Japanese" uim-lang-code-alist) 
-                   uim-lang-code-alist)))
-;インライン変換表示
+;; ;; Set UTF-8 as preferred character encoding (default is euc-jp).
+;; (setq uim-lang-code-alist
+;;      (cons '("Japanese" "Japanese" utf-8 "UTF-8")
+;;            (delete (assoc "Japanese" uim-lang-code-alist) 
+;;                     uim-lang-code-alist)))
+;; ;インライン変換表示
 (setq uim-candidate-display-inline t)
 
 ;; init-loader
