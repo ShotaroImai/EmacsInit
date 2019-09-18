@@ -50,7 +50,7 @@
 ;; key-binding for activate uim (ex. C-\)
 (global-set-key (kbd "S-SPC") 'uim-mode)
 ;;uim-modeを切りたいときのために
-(global-set-key "\C-\\" 'uim-mode-off)
+;(global-set-key "\C-\\" 'uim-mode-off)
 ;; ;; Set UTF-8 as preferred character encoding (default is euc-jp).
 ;; (setq uim-lang-code-alist
 ;;      (cons '("Japanese" "Japanese" utf-8 "UTF-8")
