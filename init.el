@@ -20,7 +20,7 @@
 (load-theme 'atom-one-dark t)
 ;;ウインドウサイズ
 (setq initial-frame-alist
-      '((top . 35) (left .45) (width . 130) (height . 40)))
+      '((top . 100) (left .45) (width . 130) (height . 40)))
 ;80 50
 
 (custom-set-faces
