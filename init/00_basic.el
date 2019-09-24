@@ -96,13 +96,13 @@
 
 
 ;dired+
-(straight-use-package 'dired+)
+(straight-use-package 'dired-plus)
 ;;Diredモードのときにrでリネームできる
 (require 'wdired)
 (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)
 
 ;;redo+
-(straight-use-package 'redo+)
+(straight-use-package 'redo-plus)
 (setq undo-no-redo t) ;;過去のundoがredoされないようにする
 ;;大量のundoに耐えられるように
 (setq undo-limit 10000)
@@ -115,3 +115,4 @@
 (global-undo-tree-mode t)
 ;; M-/ をredo に設定する。
 (global-set-key (kbd "M-/") 'undo-tree-redo)
+
