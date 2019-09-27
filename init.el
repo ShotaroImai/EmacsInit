@@ -35,9 +35,9 @@
 (prefer-coding-system 'utf-8)                   ; デフォルトの文字コードをUTF-8に
 
 ;; read uim.el
-;(require 'uim)
+(require 'uim)
 ;Ubuntuで配布しているuim-elはemacs26では不具合(uim-modeがオンになるとC-xが無効になる)なので、githubから直接落と
-(straight-use-package '(uim :local-repo "uim/emacs"))
+;(straight-use-package '(uim :local-repo "uim/emacs"))
 ;; uim.elを読み込みEmacsへIMを登録する
 ;(require 'uim-leim)
 ;;デフォルトをskkのひらがなモードへ

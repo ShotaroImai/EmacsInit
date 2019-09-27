@@ -74,7 +74,7 @@
 ;;自動で使わないバッファを消す
 (straight-use-package 'tempbuf)
 ;;ファイルを開いたら自動的にtempbufを有効にする
-(add-hook 'find-file-hooks 'turn-on-tempbuf-mode)
+;(add-hook 'find-file-hooks 'turn-on-tempbuf-mode)
 ;;diredバッファに対してtempbufを有効にする
 (add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
 ;;magitバッファに対してtempbufを有効にする
@@ -96,13 +96,13 @@
 
 
 ;dired+
-(straight-use-package 'dired+)
+(straight-use-package 'dired-plus)
 ;;Diredモードのときにrでリネームできる
 (require 'wdired)
 (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)
 
 ;;redo+
-(straight-use-package 'redo+)
+(straight-use-package 'redo-plus)
 (setq undo-no-redo t) ;;過去のundoがredoされないようにする
 ;;大量のundoに耐えられるように
 (setq undo-limit 10000)
