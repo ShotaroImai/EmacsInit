@@ -52,10 +52,10 @@
 ;;uim-modeを切りたいときのために
 ;(global-set-key "\C-\\" 'uim-mode-off)
 ;; ;; Set UTF-8 as preferred character encoding (default is euc-jp).
-;; (setq uim-lang-code-alist
-;;      (cons '("Japanese" "Japanese" utf-8 "UTF-8")
-;;            (delete (assoc "Japanese" uim-lang-code-alist) 
-;;                     uim-lang-code-alist)))
+(setq uim-lang-code-alist
+     (cons '("Japanese" "Japanese" utf-8 "UTF-8")
+           (delete (assoc "Japanese" uim-lang-code-alist) 
+                    uim-lang-code-alist)))
 ;; ;インライン変換表示
 (setq uim-candidate-display-inline t)
 
