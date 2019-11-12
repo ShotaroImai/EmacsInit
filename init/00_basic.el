@@ -1,5 +1,5 @@
 ;;; basic.el --- basic settings
-;;; Last Update:<2019-11-12@18:02MJST by imai>
+;;; Last Update:<2019-11-12@18:46JST by imai>
 ;;; 基本的設定を色々書く
 ;; スタートアップメッセージを表示させない
 (setq inhibit-startup-message 1)
@@ -33,7 +33,8 @@
 (add-hook 'before-save-hook 'time-stamp)
 (setq time-stamp-active t)
 (setq time-stamp-start "[lL]ast[ -][uU]pdate:<")
-(setq time-stamp-format "%04y-%02m-%02d@%02H:02M%Z by %u")
+;西暦-月-日@時刻(24時間表示)JST(タイムゾーン) by user
+(setq time-stamp-format "%04y-%02m-%02d@%02H:%02M%Z by %u")
 (setq time-stamp-end ">")
 (setq time-stamp-line-limit 20)
 
