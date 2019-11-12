@@ -1,3 +1,5 @@
+;;; basic.el --- basic settings
+;;; Last Update:<2019-11-12@18:02MJST by imai>
 ;;; 基本的設定を色々書く
 ;; スタートアップメッセージを表示させない
 (setq inhibit-startup-message 1)
@@ -25,6 +27,15 @@
 (line-number-mode t) ;; 行番号の表示
 ;; エラー音をならなくする
 (setq ring-bell-function 'ignore)
+
+;; 最終更新日の自動挿入
+(require 'time-stamp)
+(add-hook 'before-save-hook 'time-stamp)
+(setq time-stamp-active t)
+(setq time-stamp-start "[lL]ast[ -][uU]pdate:<")
+(setq time-stamp-format "%04y-%02m-%02d@%02H:02M%Z by %u")
+(setq time-stamp-end ">")
+(setq time-stamp-line-limit 20)
 
 ;;モードラインのカスタマイズ
 (straight-use-package 'diminish)

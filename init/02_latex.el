@@ -14,9 +14,8 @@
 (setq YaTeX-latex-message-code 'utf-8)
 (setq YaTeX-use-LaTeX2e t)
 (setq YaTeX-use-AMS-LaTeX t)
-(setq tex-command "ptex2pdf -u -l -ot \"-kanji=utf8 -synctex=1\"")
-;(setq tex-command "ptex2pdf -u -l -ot \"-kanji=utf8 -synctex=1 -od -f uptex-ms.map -f otf-up-ms.map\"")
-;(setq tex-command "lualatex -synctex=1")
+;(setq tex-command "ptex2pdf -u -l -ot \"-kanji=utf8 -synctex=1\"")
+(setq tex-command "lualatex -synctex=1")
 ;evinceでPDF見る
 (setq YaTeX-inhibit-prefix-letter t)
 (setq YaTeX-dvi2-command-ext-alist
