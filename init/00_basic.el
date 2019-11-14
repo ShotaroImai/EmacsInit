@@ -1,5 +1,4 @@
-;;; basic.el --- basic settings
-;;; Last Update:<2019-11-12@18:46JST by imai>
+;;; Last Update:<2019-11-14@19:30JST by imai>
 ;;; 基本的設定を色々書く
 ;; スタートアップメッセージを表示させない
 (setq inhibit-startup-message 1)
