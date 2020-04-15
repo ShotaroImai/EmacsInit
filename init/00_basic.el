@@ -1,4 +1,4 @@
-;;; Last Update:<2019-11-14@19:30JST by imai>
+;;; Last Update:<2020-04-15@12:25JST by imai>
 ;;; 基本的設定を色々書く
 ;; スタートアップメッセージを表示させない
 (setq inhibit-startup-message 1)
@@ -56,36 +56,8 @@
 ;; major mode
 (diminish-major-mode 'emacs-lisp-mode-hook "Elisp")
 
-;;smart-mode-lineの設定
-;(straight-use-package 'smart-mode-line)
-;;; この変数を定義しておかないとエラーになるバグあり
-;(setq sml/active-background-color "gray60")
-;パーセンテージ表示消す
-;(setq sml/position-percentage-format "")
-;;; 読み込み専用バッファは%で表示
-;(setq sml/read-only-char "%%")
-;;; 修正済みバッファは*で表示
-;(setq sml/modified-char "*")
-;;; これがないと表示がはみでる
-;(setq sml/extra-filler -10)
-;;; これを入れないとsmart-mode-lineを読み込むたびに
-;;; Loading a theme can run Lisp code.  Really load? (y or n)
-;;; と聞いてくる。
-;(setq sml/no-confirm-load-theme t)
-;テーマ
-;(straight-use-package 'smart-mode-line-atom-one-dark-theme)
-;(setq sml/theme 'atom-one-dark)
-;(sml/apply-theme 'respectful)
-;(sml/shorten-modes nil)
-;(sml/setup)
-;;; その他のthemeを設定
-;;(sml/apply-theme 'dark)
-;;(sml/apply-theme 'light)
-
 ;;自動で使わないバッファを消す
 (straight-use-package 'tempbuf)
-;;ファイルを開いたら自動的にtempbufを有効にする
-;(add-hook 'find-file-hooks 'turn-on-tempbuf-mode)
 ;;diredバッファに対してtempbufを有効にする
 (add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
 ;;magitバッファに対してtempbufを有効にする
@@ -127,3 +99,12 @@
 ;; M-/ をredo に設定する。
 (global-set-key (kbd "M-/") 'undo-tree-redo)
 
+;; autoinsertを使う
+;(require 'autoinsert)
+(add-hook 'find-file-hook 'auto-insert)
+;; テンプレートのディレクトリ
+(setq auto-insert-directory "~/.emacs.d/insert/")
+(setq auto-insert-alist
+      (append '(
+                (yatex-mode . "latex-insert.tex")
+                ) auto-insert-alist))

@@ -1,0 +1,66 @@
+%Last Update:<2020-04-15@12:25JST by imai>
+%#!ptex2pdf -u -l -ot \"-kanji=utf8 -synctex=1\"
+%#BIBTEX pbibtex -kanji=utf8 
+\documentclass[11pt,a4paper,uplatex,dvipdfmx]{ujarticle} % for uplatex
+\usepackage[sourcehan]{pxchfon} % font for uplatex
+%\usepackage{mymacros}
+\usepackage{geometry}
+ \geometry{left=20mm,right=20mm,top=20mm,bottom=20mm,includefoot}
+\usepackage[dvipdfmx]{graphicx}
+%\usepackage{graphicx}%[pdftex]
+\usepackage{amsmath,amssymb}
+\usepackage{mathrsfs}
+\usepackage[dvipdfmx,bookmarks=true,colorlinks=true,citecolor=blue]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{url}
+%\usepackage{tikz}
+%\usetikzlibrary{backgrounds,calc,arrows,snakes,shapes}
+%\usetikzlibrary{decorations.markings,decorations.pathmorphing,shapes.geometric,decorations.pathreplacing}
+%\tikzset{block/.style={draw,rectangle,text centered,rounded corners}}
+%\tikzset{->-/.style={decoration={
+%  markings,
+%  mark=at position #1 with {\arrow{latex}}},postaction={decorate}}
+%}
+% \usepackage{mathrsfs}
+% \usepackage{bm}
+%\usepackage{mathptmx}
+%\usepackage{cite}
+\usepackage{booktabs}
+\usepackage[inline]{enumitem}
+ \setlist[description]{font=\sffamily\bfseries,leftmargin=2em,style=nextline}
+ \setlist[itemize]{leftmargin=2em,itemsep=.8pt,parsep=.8pt}
+ \setlist[enumerate]{leftmargin=2em,itemsep=.8pt,parsep=.8pt}
+\usepackage{ulem}
+\setcounter{secnumdepth}{3}
+%\renewcommand{\bibname}{参考文献}
+\usepackage[numbers,sort&compress]{natbib}
+%\usepackage[authoryear]{natbib}%
+\usepackage[toc]{appendix}
+\makeatletter
+\newcommand\appendix@section[1]{%
+\refstepcounter{section}%
+\orig@section*{付録 \@Alph\c@section #1}%
+\addcontentsline{toc}{section}{付録 \@Alph\c@section #1}%
+}
+\let\orig@section\section
+\g@addto@macro\appendix{\let\section\appendix@section}
+\makeatother
+%\usepackage{listings}
+%\usepackage{feynmp}
+\newcommand{\tw}{\textwidth}
+\graphicspath{{./figs/}}
+\newcommand{\figref}[1]{図~\ref{#1}}
+\newcommand{\secref}[1]{\ref{#1}~節}
+\newcommand{\appref}[1]{付録~\ref{#1}}
+\title{}
+\author{今井 匠太朗}
+\date{\today}
+% \usepackage{fancyhdr}
+% \pagestyle{plain}
+\begin{document}
+\maketitle
+\tableofcontents
+\clearpage
+
+%\bibliographystyle{jecon_o}
+\end{document}
