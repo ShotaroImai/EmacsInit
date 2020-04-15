@@ -1,4 +1,4 @@
-;;; Last Update:<2020-04-15@12:25JST by imai>
+;;; Last Update:<2020-04-15@12:35JST by imai>
 ;;; 基本的設定を色々書く
 ;; スタートアップメッセージを表示させない
 (setq inhibit-startup-message 1)
@@ -100,8 +100,8 @@
 (global-set-key (kbd "M-/") 'undo-tree-redo)
 
 ;; autoinsertを使う
-;(require 'autoinsert)
-(add-hook 'find-file-hook 'auto-insert)
+(require 'autoinsert)
+;(add-hook 'find-file-hooks 'auto-insert)
 ;; テンプレートのディレクトリ
 (setq auto-insert-directory "~/.emacs.d/insert/")
 (setq auto-insert-alist
