@@ -1,4 +1,4 @@
-;;; Last Update:<2020-04-29@13:30JST by imai>
+;;; Last Update:<2020-04-29@16:11JST by imai>
 ;; this enables this running method
 ;;   emacs -q -l ~/.debug.emacs.d/{{pkg}}/init.el
 ;; <leaf-install-code>
@@ -190,6 +190,9 @@
   :after git-commit with-editor
   :bind
   ("C-x g" . magit-status)
+  :config
+  ;; ファイル編集時に，bufferを再読込
+  (global-auto-revert-mode 1)
   )
 
 (leaf elscreen
