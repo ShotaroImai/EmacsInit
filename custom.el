@@ -22,7 +22,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (multi-term yatex undo-tree transient-dwim shut-up recentf-ext popup magit macrostep leaf-tree leaf-convert hydra git-gutter elscreen el-get counsel company blackout avy-migemo atom-one-dark-theme)))
+    (ddskk yatex undo-tree transient-dwim shut-up recentf-ext popup multi-term magit macrostep leaf-tree leaf-convert hydra git-gutter elscreen el-get counsel company blackout avy-migemo atom-one-dark-theme)))
  '(show-paren-mode t)
  '(tab-width 4)
  '(tool-bar-mode nil)

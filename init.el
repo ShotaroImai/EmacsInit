@@ -1,4 +1,4 @@
-;;; Last Update:<2020-04-29@16:11JST by imai>
+;;; Last Update:<2020-04-30@23:54JST by imai>
 ;; this enables this running method
 ;;   emacs -q -l ~/.debug.emacs.d/{{pkg}}/init.el
 ;; <leaf-install-code>
@@ -78,65 +78,67 @@
   (load-theme 'atom-one-dark t)
   )
 
-;; (leaf ddskk
-;;   :doc "Simplnne Kana to Kanji conversion program."
-;; ;  :req "ccc-1.43" "cdb-20141201.754"
-;;   :require skk-study
-;;   :added "2020-04-26"
-;;   :ensure t
-;; ;  :after ccc cdb
-;;   :bind
-;;    (("C-\\" . skk-mode))
-;;    ;;("\C-x\C-j" . skk-mode))
-;;    :init
-;;    (setq skk-jisyo-code 'utf-8-dos)
-;;    (setq skk-user-directory "~/google/CorvusSKK/")
-;;    (setq skk-init-file "~/google/CorvusSKK/init")
-;; ;   (setq skk-jisyo (cons "~/google/CorvusSKK/userdict.txt" 'utf-8))
-;;    (setq skk-jisyo "~/google/CorvusSKK/userdict.txt")
-;;    ;; (setq skk-large-jisyo "~/google/CorvusSKK/SKK-JISYO.L")
-;; ;   (setq skk-large-jisyo "~/google/CorvusSKK/skk_jisyo/SKK-JISYO.L")
-;; ;   (setq skk-large-jisyo (cons "~/google/CorvusSKK/skkdict.txt" 'utf-8))
-;;    (setq skk-large-jisyo "~/google/CorvusSKK/skkdict.txt")
-;;    (setq default-input-method "japanese-skk")
-;;    )
-
-(leaf uim
-;  :ensure t
-;  :el-get uim/uim
-  :tag "buildin"
-  :added "2020-04-27"
+(leaf ddskk
+  :doc "Simplnne Kana to Kanji conversion program."
+;  :req "ccc-1.43" "cdb-20141201.754"
+  :require skk-study
+  :added "2020-04-26"
+  :ensure t
+;  :after ccc cdb
   :bind
-  ("C-\\" . uim-mode)
-  :init
-  (setq uim-default-im-engine "skk")
-  (setq default-input-method "japanese-skk-uim")
-  (setq uim-default-im-prop
-        '("action_skk_hiragana"))
-;  :config
-  ;; ;; Set UTF-8 as preferred character encoding (default is euc-jp).
-  )
+   (("C-\\" . skk-mode))
+   ;;("\C-x\C-j" . skk-mode))
+   :init
+   (setq skk-jisyo-code 'utf-8)
+;;   (setq skk-jisyo-code 'utf-16)
+   (setq skk-user-directory "~/google/CorvusSKK/")
+   (setq skk-init-file "~/google/CorvusSKK/init")
+;;   (setq skk-jisyo (cons "~/google/CorvusSKK/userdict.txt" 'utf-16))
+;;   (setq skk-jisyo "~/google/CorvusSKK/userdict.txt")
+   (setq skk-jisyo "~/google/CorvusSKK/userdict.utf8")
+;;   (setq skk-large-jisyo "~/google/CorvusSKK/skkdict.txt")
+;;   (setq skk-large-jisyo (cons "~/google/CorvusSKK/skkdict.txt" 'utf-16))
+   (setq skk-large-jisyo "~/google/CorvusSKK/SKK-JISYO.utf8")
+   (setq default-input-method "japanese-skk")
+   )
+
+;;(leaf uim
+;;;  :ensure t
+;;;  :el-get uim/uim
+;;  :tag "buildin"
+;;  :added "2020-04-27"
+;;  :bind
+;;  ("C-\\" . uim-mode)
+;;  ("S-SPC" . uim-mode)
+;;  :init
+;;  (setq uim-default-im-engine "skk")
+;;  (setq default-input-method "japanese-skk-uim")
+;;  (setq uim-default-im-prop
+;;        '("action_skk_hiragana"))
+;;;  :config
+;;  ;; ;; Set UTF-8 as preferred character encoding (default is euc-jp).
+;;  )
   ;; (setq uim-lang-code-alist
   ;; (cons '("Japanese" "Japanese" utf-8 "UTF-8")
-  ;; (delete (assoc "Japanese" uim-lang-code-alist) 
+  ;; (delete (assoc "Japanese" uim-lang-code-alist)
   ;;  uim-lang-code-alist)))
   ;; ;インライン変換表示
-  (setq uim-candidate-display-inline t)
+;;  (setq uim-candidate-display-inline t)
 
-(leaf time-stamp
-  :doc "Maintain last change time stamps in files edited by Emacs"
-  :tag "builtin"
-  :added "2020-04-27"
-  :hook
-  (before-save-hook . time-stamp)
-  :config
-  (setq time-stamp-active t)
-  (setq time-stamp-start "[lL]ast[ -][uU]pdate:<")
-  ;; 西暦-月-日@時刻(24時間表示)JST(タイムゾーン) by user
-  (setq time-stamp-format "%04y-%02m-%02d@%02H:%02M%Z by %u")
-  (setq time-stamp-end ">")
-  (setq time-stamp-line-limit 20)
-  )
+;;(leaf time-stamp
+;;  :doc "Maintain last change time stamps in files edited by Emacs"
+;;  :tag "builtin"
+;;  :added "2020-04-27"
+;;  :hook
+;;  (before-save-hook . time-stamp)
+;;  :config
+;;  (setq time-stamp-active t)
+;;  (setq time-stamp-start "[lL]ast[ -][uU]pdate:<")
+;;  ;; 西暦-月-日@時刻(24時間表示)JST(タイムゾーン) by user
+;;  (setq time-stamp-format "%04y-%02m-%02d@%02H:%02M%Z by %u")
+;;  (setq time-stamp-end ">")
+;;  (setq time-stamp-line-limit 20)
+;;  )
 
 (leaf recentf-ext
  :doc "Recentf extensions"
@@ -144,6 +146,9 @@
  :added "2020-04-27"
  :url "http://www.emacswiki.org/cgi-bin/wiki/download/recentf-ext.el"
  :ensure t
+ :bind
+;; ("C-x C-r" . counsel-recentf)
+ ("C-x C-r" . recentf-open-files)
  :config
  (recentf-mode 1)
  (setq recentf-max-saved-items 200)
@@ -311,7 +316,8 @@
   ("M-y" . counsel-yank-pop)
   ("C-x C-r" . counsel-recentf)
   ("C-x C-b" . counsel-ibuffer)
-  ("C-x C-f" . counsel-find-file)
+  ("C-c g" . counsel-git)
+;;  ("C-x C-f" . counsel-find-file)
   :config
   (counsel-mode 1)
 ;;  (setq counsel-find-file-ignore-regexp (regexp-opt '("./" "../")))
@@ -383,46 +389,90 @@
 )
 
 ;; <multi-term>
-(leaf multi-term
-  :ensure t
-  :custom `((multi-term-program . ,(getenv "SHELL")))
-  :preface
-  (defun namn/open-shell-sub (new)
-   (split-window-below)
-   (enlarge-window 5)
-   (other-window 1)
-   (let ((term) (res))
-     (if (or new (null (setq term (dolist (buf (buffer-list) res)
-                                    (if (string-match "*terminal<[0-9]+>*" (buffer-name buf))
-                                        (setq res buf))))))
-         (multi-term)
-       (switch-to-buffer term))))
-  (defun namn/open-shell ()
-    (interactive)
-    (namn/open-shell-sub t))
-  (defun namn/to-shell ()
-    (interactive)
-    (namn/open-shell-sub nil))
-  :bind (("C-^"   . namn/to-shell)
-         ("C-M-^" . namn/open-shell)
-         (:term-raw-map
-          ("C-t" . other-window))))
+;;(leaf multi-term
+;;  :ensure t
+;;  :custom `((multi-term-program . ,(getenv "SHELL")))
+;;  :preface
+;;  (defun namn/open-shell-sub (new)
+;;   (split-window-below)
+;;   (enlarge-window 5)
+;;   (other-window 1)
+;;   (let ((term) (res))
+;;     (if (or new (null (setq term (dolist (buf (buffer-list) res)
+;;                                    (if (string-match "*terminal<[0-9]+>*" (buffer-name buf))
+;;                                        (setq res buf))))))
+;;         (multi-term)
+;;       (switch-to-buffer term))))
+;;  (defun namn/open-shell ()
+;;    (interactive)
+;;    (namn/open-shell-sub t))
+;;  (defun namn/to-shell ()
+;;    (interactive)
+;;    (namn/open-shell-sub nil))
+;;  :bind (("C-^"   . namn/to-shell)
+;;         ("C-M-^" . namn/open-shell)
+;;         (:term-raw-map
+;;          ("C-t" . other-window))))
 ;;</multi-term>
 
-;;<tab>
-(leaf whitespace
-  :ensure t
-  :custom
-  ((whitespace-style . '(face
-                         trailing
-                         tabs
-                         ;; spaces
-                         ;; empty
-                         space-mark
-                         tab-mark))
-   (whitespace-display-mappings . '((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
-   (global-whitespace-mode . t)))
-;;</tab>
+;;<tabスペース削除>
+;;(leaf whitespace
+;;  :ensure t
+;;  :custom
+;;  ((whitespace-style . '(face
+;;                         trailing
+;;                         tabs
+;;                         ;; spaces
+;;                         ;; empty
+;;                         space-mark
+;;                         tab-mark))
+;;   (whitespace-display-mappings . '((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
+;;   (global-whitespace-mode . t)))
+;;</tabスペース削除>
+
+(leaf cl-lib
+  :doc "Common Lisp extensions for Emacs"
+  :tag "builtin"
+  :added "2020-04-29"
+  :config
+  ;; 改行文字の文字列表現
+(set 'eol-mnemonic-dos "(CRLF)")
+(set 'eol-mnemonic-unix "(LF)")
+(set 'eol-mnemonic-mac "(CR)")
+(set 'eol-mnemonic-undecided "(NON)")
+
+;; 文字エンコーディングの文字列表現
+(defun my-coding-system-name-mnemonic (coding-system)
+  (let* ((base (coding-system-base coding-system))
+         (name (symbol-name base)))
+    (cond ((string-prefix-p "utf-8" name) "U8")
+          ((string-prefix-p "utf-16" name) "U16")
+          ((string-prefix-p "utf-7" name) "U7")
+          ((string-prefix-p "japanese-shift-jis" name) "SJIS")
+          ((string-match "cp\\([0-9]+\\)" name) (match-string 1 name))
+          ((string-match "japanese-iso-8bit" name) "EUC")
+          (t "???")
+          )))
+
+(defun my-coding-system-bom-mnemonic (coding-system)
+  (let ((name (symbol-name coding-system)))
+    (cond ((string-match "be-with-signature" name) "[BE]")
+          ((string-match "le-with-signature" name) "[LE]")
+          ((string-match "-with-signature" name) "[BOM]")
+          (t ""))))
+
+(defun my-buffer-coding-system-mnemonic ()
+  "Return a mnemonic for `buffer-file-coding-system'."
+  (let* ((code buffer-file-coding-system)
+         (name (my-coding-system-name-mnemonic code))
+         (bom (my-coding-system-bom-mnemonic code)))
+    (format "%s%s" name bom)))
+
+;; `mode-line-mule-info' の文字エンコーディングの文字列表現を差し替える
+(setq-default mode-line-mule-info
+              (cl-substitute '(:eval (my-buffer-coding-system-mnemonic))
+                             "%z" mode-line-mule-info :test 'equal))
+)
 
 ;; Prevent Inserting custom-variables by system
 (leaf cus-edit
