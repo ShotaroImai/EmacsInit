@@ -1,4 +1,3 @@
-;;; Last Update:<2020-04-30@23:54JST by imai>
 ;; this enables this running method
 ;;   emacs -q -l ~/.debug.emacs.d/{{pkg}}/init.el
 ;; <leaf-install-code>
@@ -32,10 +31,6 @@
 
 ;; ここにいっぱい設定を書く
 ;;言語環境
-(set-language-environment "Japanese")           ; 言語環境を"japanese"に
-(prefer-coding-system 'utf-8)
-(define-key global-map (kbd "C-t") 'other-window) ; ウィンドウ切り替え
-(setq-default indent-tabs-mode nil)
 ;; <leaf-setting>
 (leaf leaf
   :config
@@ -50,9 +45,20 @@
   :doc "define customization properties of builtins"
   :tag "builtin" "internal"
   :added "2020-04-26"
+  :bind
+  ("C-t" . other-window)
+  :init
+    (set-language-environment "Japanese") ; 言語環境を"japanese"に
+    (prefer-coding-system 'utf-8)
+;;    (define-key global-map (kbd "C-t") 'other-window) ; ウィンドウ切り替え
+    (setq-default indent-tabs-mode nil)
+    (setq initial-frame-alist
+          '((top . 80) (left . 60) (width . 160) (height . 40)))
+    (set-face-attribute 'default nil :family "Ricty Discord" :height 140)
+    (setq frame-title-format "%f")
   :custom
   `((tool-bar-mode . nil)
-    (inhibit-startup-message . t) ;; すたーとめにゅー消す
+    (inhibit-startup-message . t) ;; スタートメニュー消す
     (transient-mark-mode . t)  ;;リージョンに色をつける
     (make-backup-files . nil) ;; *.~ とかのバックアップファイルを作らない
     (electric-pair-mode . t) ;;カッコ補完
@@ -64,10 +70,6 @@
     (line-number-mode . t) ;; 行番号の表示
     )
   )
-(setq initial-frame-alist
-      '((top . 80) (left . 60) (width . 160) (height . 40)))
-(set-face-attribute 'default nil :family "Ricty Discord" :height 140)
-(setq frame-title-format "%f")
 
 (leaf atom-one-dark-theme
   :doc "Atom One Dark color theme"
@@ -90,55 +92,12 @@
    ;;("\C-x\C-j" . skk-mode))
    :init
    (setq skk-jisyo-code 'utf-8)
-;;   (setq skk-jisyo-code 'utf-16)
    (setq skk-user-directory "~/google/CorvusSKK/")
    (setq skk-init-file "~/google/CorvusSKK/init")
-;;   (setq skk-jisyo (cons "~/google/CorvusSKK/userdict.txt" 'utf-16))
-;;   (setq skk-jisyo "~/google/CorvusSKK/userdict.txt")
    (setq skk-jisyo "~/google/CorvusSKK/userdict.utf8")
-;;   (setq skk-large-jisyo "~/google/CorvusSKK/skkdict.txt")
-;;   (setq skk-large-jisyo (cons "~/google/CorvusSKK/skkdict.txt" 'utf-16))
    (setq skk-large-jisyo "~/google/CorvusSKK/SKK-JISYO.utf8")
    (setq default-input-method "japanese-skk")
    )
-
-;;(leaf uim
-;;;  :ensure t
-;;;  :el-get uim/uim
-;;  :tag "buildin"
-;;  :added "2020-04-27"
-;;  :bind
-;;  ("C-\\" . uim-mode)
-;;  ("S-SPC" . uim-mode)
-;;  :init
-;;  (setq uim-default-im-engine "skk")
-;;  (setq default-input-method "japanese-skk-uim")
-;;  (setq uim-default-im-prop
-;;        '("action_skk_hiragana"))
-;;;  :config
-;;  ;; ;; Set UTF-8 as preferred character encoding (default is euc-jp).
-;;  )
-  ;; (setq uim-lang-code-alist
-  ;; (cons '("Japanese" "Japanese" utf-8 "UTF-8")
-  ;; (delete (assoc "Japanese" uim-lang-code-alist)
-  ;;  uim-lang-code-alist)))
-  ;; ;インライン変換表示
-;;  (setq uim-candidate-display-inline t)
-
-;;(leaf time-stamp
-;;  :doc "Maintain last change time stamps in files edited by Emacs"
-;;  :tag "builtin"
-;;  :added "2020-04-27"
-;;  :hook
-;;  (before-save-hook . time-stamp)
-;;  :config
-;;  (setq time-stamp-active t)
-;;  (setq time-stamp-start "[lL]ast[ -][uU]pdate:<")
-;;  ;; 西暦-月-日@時刻(24時間表示)JST(タイムゾーン) by user
-;;  (setq time-stamp-format "%04y-%02m-%02d@%02H:%02M%Z by %u")
-;;  (setq time-stamp-end ">")
-;;  (setq time-stamp-line-limit 20)
-;;  )
 
 (leaf recentf-ext
  :doc "Recentf extensions"
@@ -146,16 +105,21 @@
  :added "2020-04-27"
  :url "http://www.emacswiki.org/cgi-bin/wiki/download/recentf-ext.el"
  :ensure t
- :bind
+ ;; :init
+ ;; (defun my/ido-recentf ()
+ ;; (interactive)
+ ;; (find-file (ido-completing-read "Find recent file: " recentf-list)))
+;; :bind
 ;; ("C-x C-r" . counsel-recentf)
- ("C-x C-r" . recentf-open-files)
+;; ("C-x C-r" . recentf-open-files)
  :config
- (recentf-mode 1)
+ (recentf-mode t)
  (setq recentf-max-saved-items 200)
  (setq recentf-save-file "~/.emacs.d/recentf")
  (setq recentf-auto-cleanup 'never)
  ;; .recentf自体は含まない
  (setq recentf-exclude '("recentf"))
+ (setq recentf-auto-save-timer (run-with-idle-timer 30 t 'recentf-save-list))
  )
 
 (leaf undo-tree
@@ -262,67 +226,6 @@
   (setq makeindex-command "latexmk -e \"$latex=q/uplatex %O -kanji=utf8 -no-guess-input-enc -synctex=1 %S/\" -e \"$bibtex=q/upbibtex %O %B/\" -e \"$biber=q/biber %O --bblencoding=utf8 -u -U --output_safechars %B/\" -e \"$makeindex=q/upmendex %O -o %D %S/\" -e \"$dvipdf=q/dvipdfmx %O -o %D %S/\" -norc -gg -pdfdvi")
   )
 
-;;<ivy/counsel>
-(leaf ivy
-  :doc "Incremental Vertical completYon"
-  :req "emacs-24.5"
-  :tag "matching" "emacs>=24.5"
-  :added "2020-04-27"
-  :url "https://github.com/abo-abo/swiper"
-  :emacs>= 24.5
-  :ensure t
-  :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
-;;  (setq ivy-height 20) ;; minibufferのサイズをかくだい
-  (setq ivy-extra-directories nil)
-  (setq ivy-re-builders-alist
-        '((t . ivy--regex-plus)
-          (swiper . ivy--regex-plus)))
-  (setq ivy-use-virtual-buffers t)
-  )
-
-(leaf swiper
-  :doc "Isearch with an overview. Oh, man!"
-  :req "emacs-24.5" "ivy-0.13.0"
-  :tag "matching" "emacs>=24.5"
-  :added "2020-04-27"
-  :url "https://github.com/abo-abo/swiper"
-  :emacs>= 24.5
-  :ensure t
-  :after ivy
-  :bind
-  ("C-s" . isearch-forward-or-swiper)
-  :config
-  (defun isearch-forward-or-swiper (use-swiper)
-    (interactive "p")
-    ;; (interactive "P") ;; 大文字のPだと，C-u C-sでないと効かない
-    (let (current-prefix-arg)
-      (call-interactively (if use-swiper 'swiper 'isearch-forward))))
-  )
-
-(leaf counsel
-  :doc "Various completion functions using Ivy"
-  :req "emacs-24.5" "swiper-0.13.0"
-  :tag "tools" "matching" "convenience" "emacs>=24.5"
-  :added "2020-04-27"
-  :url "https://github.com/abo-abo/swiper"
-  :emacs>= 24.5
-  :ensure t
-  :after swiper
-  :bind
-  ("M-x" . counsel-M-x)
-  ("M-y" . counsel-yank-pop)
-  ("C-x C-r" . counsel-recentf)
-  ("C-x C-b" . counsel-ibuffer)
-  ("C-c g" . counsel-git)
-;;  ("C-x C-f" . counsel-find-file)
-  :config
-  (counsel-mode 1)
-;;  (setq counsel-find-file-ignore-regexp (regexp-opt '("./" "../")))
-  )
-
 (leaf migemo
   :doc "Japanese incremental search through dynamic pattern expansion"
   :req "cl-lib-0.5"
@@ -341,24 +244,266 @@
   (load-libray "migemo")
   (migemo-init))
 
-(leaf avy-migemo
-  :doc "avy with migemo"
-  :req "emacs-24.4" "avy-0.4.0" "migemo-1.9"
-  :tag "migemo" "avy" "emacs>=24.4"
-  :added "2020-04-27"
-  :url "https://github.com/momomo5717/avy-migemo"
-  :emacs>= 24.4
-  :ensure t
-  :after avy migemo
-  :require "avy-migemo-e.g.swiper"
+;; <ido>
+(leaf ido
+  :doc "interactively do things with buffers and files"
+  :tag "builtin"
+  :added "2020-05-02"
   :bind
-  ("C-M-;" . avy-migemo-goto-char-timer)
+  ("C-x C-f" . ido-find-file)
+  ;;  ("C-x C-r" . recentf-list)
+  ("C-x C-d" . ido-dired)
+  ("C-x b" . ido-switch-buffer)
+  ("C-x C-b" . ido-switch-buffer)
   :config
-  (avy-migemo-mode . t)
-  (setq avy-timeout-seconds nil)
-  (require 'avy-migemo-e.g.swiper)
+  (ido-mode t)
+  (ido-everywhere t)
+;;  (ido-ubiquitous-mode t)
+  ;; あいまい検索
+  (setq ido-enable-flex-matching t)
   )
 
+(leaf amx
+  :doc "Alternative M-x with extra features."
+  :req "emacs-24.4" "s-0"
+  :tag "usability" "convenience" "emacs>=24.4"
+  :added "2020-05-02"
+  :url "http://github.com/DarwinAwardWinner/amx/"
+  :emacs>= 24.4
+  :ensure t
+  :bind
+  ("M-x" . amx)
+  :config
+  (amx-mode t)
+  )
+
+(leaf ido-completing-read+
+  :doc "A completing-read-function using ido"
+  :req "emacs-24.4" "seq-0.5" "cl-lib-0.5" "memoize-1.1"
+  :tag "convenience" "completion" "ido" "emacs>=24.4"
+  :added "2020-05-02"
+  :url "https://github.com/DarwinAwardWinner/ido-completing-read-plus"
+  :emacs>= 24.4
+  :ensure t
+  :after memoize
+  :config
+  (ido-ubiquitous-mode t)
+  )
+
+(leaf ido-yes-or-no
+  :doc "Use Ido to answer yes-or-no questions"
+  :req "ido-completing-read+-0"
+  :tag "ido" "completion" "convenience"
+  :added "2020-05-02"
+  :url "https://github.com/DarwinAwardWinner/ido-yes-or-no"
+  :ensure t
+  :after ido-completing-read+
+  :config
+  (ido-yes-or-no-mode t)
+  )
+
+(leaf *Ido-recentf-open
+  :preface
+  (defun ido-recentf-open ()
+    (interactive)
+    (find-file (ido-completing-read "Find recent file: " recentf-list)))
+  :bind ("C-x C-r" . ido-recentf-open)
+  )
+
+(leaf ido-vertical-mode
+  :doc "Makes ido-mode display vertically."
+  :tag "convenience"
+  :added "2020-05-02"
+  :url "https://github.com/creichert/ido-vertical-mode.el"
+  :ensure t
+  :config
+  (ido-vertical-mode t)
+  ;; C-n/C-pで候補選択する
+  (setq ido-vertical-define-keys 'C-n-and-C-p-only)
+  )
+(leaf flx-ido
+  :doc "flx integration for ido"
+  :req "flx-0.1" "cl-lib-0.3"
+  :added "2020-05-02"
+  :url "https://github.com/lewang/flx"
+  :ensure t
+  :after flx
+  :config
+  (flx-ido-mode 1)
+  :custom
+  `((flx-ido-use-faces . t)
+    (flx-ido-threshold . 10000))
+  )
+
+(leaf ido-flex-with-migemo
+  :doc "use ido with flex and migemo"
+  :req "flx-ido-0.6.1" "migemo-1.9.1" "emacs-24.4"
+  :tag "matching" "emacs>=24.4"
+  :added "2020-05-02"
+  :url "https://github.com/ROCKTAKEY/ido-flex-with-migemo"
+  :emacs>= 24.4
+  :ensure t
+  :after flx-ido migemo
+  :config
+  (ido-flex-with-migemo-mode . t)
+  )
+;;</ido>
+
+
+(leaf plantuml-mode
+  :doc "Major mode for PlantUML"
+  :req "dash-2.0.0" "emacs-25.0"
+  :tag "ascii" "plantuml" "uml" "emacs>=25.0"
+  :added "2020-05-02"
+  :emacs>= 25.0
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\.pu$" . plantuml-mode))
+  (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+  (setq plantuml-default-exec-mode 'jar)
+;; javaにオプションを渡したい場合はここにかく
+;(setq plantuml-java-options "")
+;; plantumlのプレビューをsvg, pngにしたい場合はここをコメントイン
+;; デフォルトでアスキーアート
+;(setq plantuml-output-type "utxt")
+  ;; 日本語を含むUMLを書く場合はUTF-8を指定
+  (setq plantuml-options "-charset UTF-8")
+  )
+
+;; ;;<flycheck>
+(leaf flycheck
+  :doc "On-the-fly syntax checking"
+  :req "dash-2.12.1" "pkg-info-0.4" "let-alist-1.0.4" "seq-1.11" "emacs-24.3"
+  :tag "tools" "languages" "convenience" "emacs>=24.3"
+  :added "2020-05-02"
+  :url "http://www.flycheck.org"
+  :emacs>= 24.3
+  :ensure t
+  :init (global-flycheck-mode)
+  :config
+   (setq
+     flycheck-display-errors-delay 1
+     flycheck-highlighting-mode 'lines  ;; columns symbolsm sexps lines
+     flycheck-check-syntax-automatically '(save)
+     )
+   )
+
+(leaf flycheck-plantuml
+  :doc "Integrate plantuml with flycheck"
+  :req "flycheck-0.24" "emacs-24.4" "plantuml-mode-1.2.2"
+  :tag "emacs>=24.4"
+  :added "2020-05-02"
+  :url "https://github.com/alexmurray/flycheck-plantuml"
+  :emacs>= 24.4
+  :ensure t
+  :after flycheck plantuml-mode
+  :config
+  (flycheck-plantuml-setup)
+  )
+
+(leaf flyspell
+  :doc "On-the-fly spell checker"
+  :tag "builtin"
+  :added "2020-05-02"
+  :hook ((prog-mode . flyspell-prog-mode)    ;; flyspell-prog-modeはコメント領域だけ
+         (yatex-mode . flyspell-mode)
+         (org-mode . flyspell-mode)
+         (text-mode . flyspell-mode))
+)
+
+(leaf ispell
+  :doc "interface to spell checkers"
+  :tag "builtin"
+  :added "2020-05-02"
+  :config
+  (setq ispell-program-name "hunspell")
+  (setq ispell-really-hunspell t)
+  ;;;日本語混りでも使えるように
+  (eval-after-load "ispell"
+    '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
+  (setq ispell-dictionary   "en_US")
+  )
+
+
+;; ;;<ivy/counsel>
+;; (leaf ivy
+;;   :doc "Incremental Vertical completYon"
+;;   :req "emacs-24.5"
+;;   :tag "matching" "emacs>=24.5"
+;;   :added "2020-04-27"
+;;   :url "https://github.com/abo-abo/swiper"
+;;   :emacs>= 24.5
+;;   :ensure t
+;;   :config
+;;   (ivy-mode 1)
+;;   (setq ivy-use-virtual-buffers t)
+;;   (setq enable-recursive-minibuffers t)
+;; ;;  (setq ivy-height 20) ;; minibufferのサイズをかくだい
+;;   (setq ivy-extra-directories nil)
+;;   (setq ivy-re-builders-alist
+;;         '((t . ivy--regex-plus)
+;;           (swiper . ivy--regex-plus)))
+;;   (setq ivy-use-virtual-buffers t)
+;;   )
+
+;; (leaf swiper
+;;   :doc "Isearch with an overview. Oh, man!"
+;;   :req "emacs-24.5" "ivy-0.13.0"
+;;   :tag "matching" "emacs>=24.5"
+;;   :added "2020-04-27"
+;;   :url "https://github.com/abo-abo/swiper"
+;;   :emacs>= 24.5
+;;   :ensure t
+;;   :after ivy
+;;   :bind
+;;   ("C-s" . isearch-forward-or-swiper)
+;;   :config
+;;   (defun isearch-forward-or-swiper (use-swiper)
+;;     (interactive "p")
+;;     ;; (interactive "P") ;; 大文字のPだと，C-u C-sでないと効かない
+;;     (let (current-prefix-arg)
+;;       (call-interactively (if use-swiper 'swiper 'isearch-forward))))
+;;   )
+
+;; (leaf counsel
+;;   :doc "Various completion functions using Ivy"
+;;   :req "emacs-24.5" "swiper-0.13.0"
+;;   :tag "tools" "matching" "convenience" "emacs>=24.5"
+;;   :added "2020-04-27"
+;;   :url "https://github.com/abo-abo/swiper"
+;;   :emacs>= 24.5
+;;   :ensure t
+;;   :after swiper
+;;   :bind
+;;   ("M-x" . counsel-M-x)
+;;   ("M-y" . counsel-yank-pop)
+;;   ("C-x C-r" . counsel-recentf)
+;;   ("C-x C-b" . counsel-ibuffer)
+;;   ("C-c g" . counsel-git)
+;;   ("C-x C-f" . counsel-find-file)
+;;   :config
+;;   (counsel-mode 1)
+;; ;;  (setq counsel-find-file-ignore-regexp (regexp-opt '("./" "../")))
+;;   )
+
+;; (leaf avy-migemo
+;;   :doc "avy with migemo"
+;;   :req "emacs-24.4" "avy-0.4.0" "migemo-1.9"
+;;   :tag "migemo" "avy" "emacs>=24.4"
+;;   :added "2020-04-27"
+;;   :url "https://github.com/momomo5717/avy-migemo"
+;;   :emacs>= 24.4
+;;   :ensure t
+;;   :after avy migemo
+;;   :require "avy-migemo-e.g.swiper"
+;;   :bind
+;;   ("C-M-;" . avy-migemo-goto-char-timer)
+;;   :config
+;;   (avy-migemo-mode . t)
+;;   (setq avy-timeout-seconds nil)
+;;   (require 'avy-migemo-e.g.swiper)
+;;   )
+;; ;; </ivy/counsel>
 
 (leaf company
   :doc "Modular text completion framework"
@@ -388,47 +533,21 @@
   (setq company-dabbrev-downcase . nil)
 )
 
-;; <multi-term>
-;;(leaf multi-term
-;;  :ensure t
-;;  :custom `((multi-term-program . ,(getenv "SHELL")))
-;;  :preface
-;;  (defun namn/open-shell-sub (new)
-;;   (split-window-below)
-;;   (enlarge-window 5)
-;;   (other-window 1)
-;;   (let ((term) (res))
-;;     (if (or new (null (setq term (dolist (buf (buffer-list) res)
-;;                                    (if (string-match "*terminal<[0-9]+>*" (buffer-name buf))
-;;                                        (setq res buf))))))
-;;         (multi-term)
-;;       (switch-to-buffer term))))
-;;  (defun namn/open-shell ()
-;;    (interactive)
-;;    (namn/open-shell-sub t))
-;;  (defun namn/to-shell ()
-;;    (interactive)
-;;    (namn/open-shell-sub nil))
-;;  :bind (("C-^"   . namn/to-shell)
-;;         ("C-M-^" . namn/open-shell)
-;;         (:term-raw-map
-;;          ("C-t" . other-window))))
-;;</multi-term>
 
-;;<tabスペース削除>
-;;(leaf whitespace
-;;  :ensure t
-;;  :custom
-;;  ((whitespace-style . '(face
-;;                         trailing
-;;                         tabs
-;;                         ;; spaces
-;;                         ;; empty
-;;                         space-mark
-;;                         tab-mark))
-;;   (whitespace-display-mappings . '((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
-;;   (global-whitespace-mode . t)))
-;;</tabスペース削除>
+;; <tabスペース削除>
+(leaf whitespace
+ :ensure t
+ :custom
+ ((whitespace-style . '(face
+                        trailing
+                        tabs
+                        ;; spaces
+                        ;; empty
+                        space-mark
+                        tab-mark))
+  (whitespace-display-mappings . '((tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
+  (global-whitespace-mode . t)))
+;; </tabスペース削除>
 
 (leaf cl-lib
   :doc "Common Lisp extensions for Emacs"

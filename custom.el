@@ -14,7 +14,6 @@
  '(inhibit-startup-screen t)
  '(line-number-mode t)
  '(make-backup-files nil)
- '(multi-term-program "/bin/bash" t)
  '(package-archives
    (quote
     (("org" . "https://orgmode.org/elpa/")
@@ -22,7 +21,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (ddskk yatex undo-tree transient-dwim shut-up recentf-ext popup multi-term magit macrostep leaf-tree leaf-convert hydra git-gutter elscreen el-get counsel company blackout avy-migemo atom-one-dark-theme)))
+    (flycheck-plantuml flycheck plantuml-mode yatex undo-tree transient-dwim smex shut-up recentf-ext popup multi-term magit macrostep leaf-tree leaf-convert ido-yes-or-no ido-vertical-mode ido-flex-with-migemo hydra git-gutter elscreen el-get ddskk counsel company blackout avy-migemo atom-one-dark-theme amx)))
  '(show-paren-mode t)
  '(tab-width 4)
  '(tool-bar-mode nil)
