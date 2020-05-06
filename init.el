@@ -468,15 +468,22 @@
 ;; ;;</tex>
 
 ;; ;;<python>
-(leaf ein
-  :doc "Emacs IPython Notebook"
-  :req "emacs-25" "websocket-20190620.338" "anaphora-20180618" "request-20200117.0" "deferred-0.5" "polymode-20190714.0" "dash-2.13.0"
-  :tag "emacs>=25"
-  :added "2020-05-03"
-  :emacs>= 25
-  :ensure t
-  :after websocket anaphora deferred polymode
-  )
+;; (leaf ein
+;;   :doc "Emacs IPython Notebook"
+;;   :req "emacs-25" "websocket-20190620.338" "anaphora-20180618" "request-20200117.0" "deferred-0.5" "polymode-20190714.0" "dash-2.13.0"
+;;   :tag "emacs>=25"
+;;   :added "2020-05-03"
+;;   :emacs>= 25
+;;   :ensure t
+;;   :after websocket anaphora deferred polymode
+;;   :config
+;;   ;; Use IPython for REPL
+;;   ;; (setq python-shell-interpreter "jupyter"
+;;   ;;       python-shell-interpreter-args "console --simple-prompt"
+;;   ;;       python-shell-prompt-detect-failure-warning nil)
+;;   ;; (add-to-list 'python-shell-completion-native-disabled-interpreters
+;;   ;;              "jupyter")
+;;   )
 
 (leaf elpy
   :doc "Emacs Python Development Environment"
@@ -487,21 +494,47 @@
   :ensure t
   :after company highlight-indentation pyvenv yasnippet
   :init
-  (elpy-enable)
-  (elpy-use-ipython)
+;;  (elpy-enable)
+;;  (elpy-use-ipython)
+  (advice-add 'python-mode :before 'elpy-enable)
   :config
-  ;; Use IPython for REPL
-  (setq python-shell-interpreter "jupyter"
-        python-shell-interpreter-args "console --simple-prompt"
-        python-shell-prompt-detect-failure-warning nil)
-  (add-to-list 'python-shell-completion-native-disabled-interpreters
-               "jupyter")
+;;   ;;; 使用する Anaconda の仮想環境を設定
+;;   (defvar venv-default "~/anaconda3/envs/")
+;; ;;; デフォルト環境を有効化
+;;   (pyvenv-activate venv-default)
+;; ;;; REPL 環境に IPython を使う
+;;   (elpy-use-ipython)
 
   ;; Enable Flycheck
   (when (require 'flycheck nil t)
     (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
     (add-hook 'elpy-mode-hook 'flycheck-mode))
+  (setq elpy-rpc-virtualenv-path 'current)
+  (when (load "flycheck" t t)
+    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+    (add-hook 'elpy-mode-hook 'flycheck-mode))
   )
+
+;; (leaf conda
+;;   :doc "Work with your conda environments"
+;;   :req "emacs-24.4" "pythonic-0.1.0" "dash-2.13.0" "s-1.11.0" "f-0.18.2"
+;;   :tag "conda" "environment" "python" "emacs>=24.4"
+;;   :added "2020-05-06"
+;;   :url "http://github.com/necaris/conda.el"
+;;   :emacs>= 24.4
+;;   :ensure t
+;;   :after pythonic
+;;   :config
+;;   ;; if you want interactive shell support, include:
+;;   (conda-env-initialize-interactive-shells)
+;;   ;; if you want eshell support, include:
+;; ;;  (conda-env-initialize-eshell)
+;;   ;; if you want auto-activation (see below for details), include:
+;;   (conda-env-autoactivate-mode t)
+;;   (setq conda-anaconda-home (expand-file-name "~/anaconda3/"))
+;;   (setq conda-env-home-directory (expand-file-name "~/anaconda3/"))
+;;   (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format))
+;; )
 ;; ;;</python>
 
 ;; ;;<plantuml>
@@ -584,6 +617,17 @@
   (global-whitespace-mode . t)))
 ;; </tabスペース削除>
 
+;; ;;<fish>
+(leaf fish-mode
+  :doc "Major mode for fish shell scripts"
+  :req "emacs-24"
+  :tag "shell" "fish" "emacs>=24"
+  :added "2020-05-06"
+  :emacs>= 24
+  :ensure t)
+;; ;;</fish>
+
+;; ;;<文字コ-ド表示>
 (leaf cl-lib
   :doc "Common Lisp extensions for Emacs"
   :tag "builtin"
@@ -627,6 +671,8 @@
               (cl-substitute '(:eval (my-buffer-coding-system-mnemonic))
                              "%z" mode-line-mule-info :test 'equal))
 )
+;; ;;</文字コ-ド表示>
+
 
 ;; Prevent Inserting custom-variables by system
 (leaf cus-edit

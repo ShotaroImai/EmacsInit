@@ -21,7 +21,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (ein "C-x C-r" yatex undo-tree transient-dwim smex shut-up recentf-ext popup neotree multi-term magit macrostep leaf-tree leaf-convert ivy-dired-history ido-yes-or-no ido-vertical-mode ido-flex-with-migemo hydra git-gutter flyspell-correct-ivy flycheck-plantuml elscreen elpy el-get ddskk blackout avy-migemo atom-one-dark-theme amx all-the-icons-ivy-rich)))
+    (fish-mode yatex undo-tree transient-dwim smex shut-up recentf-ext popup neotree multi-term magit macrostep leaf-tree leaf-convert ivy-dired-history ido-yes-or-no ido-vertical-mode ido-flex-with-migemo hydra git-gutter flyspell-correct-ivy flycheck-plantuml elscreen elpy el-get ein ddskk conda blackout avy-migemo atom-one-dark-theme amx all-the-icons-ivy-rich)))
  '(show-paren-mode t)
  '(tab-width 4)
  '(tool-bar-mode nil)
