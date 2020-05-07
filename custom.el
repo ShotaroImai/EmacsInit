@@ -9,8 +9,8 @@
  '(global-display-line-numbers-mode t)
  '(global-undo-tree-mode t)
  '(global-whitespace-mode t)
- '(imenu-list-position (quote left) t)
- '(imenu-list-size 30 t)
+ '(imenu-list-position (quote left))
+ '(imenu-list-size 30)
  '(inhibit-startup-screen t)
  '(line-number-mode t)
  '(make-backup-files nil)
@@ -21,7 +21,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (fish-mode yatex undo-tree transient-dwim smex shut-up recentf-ext popup neotree multi-term magit macrostep leaf-tree leaf-convert ivy-dired-history ido-yes-or-no ido-vertical-mode ido-flex-with-migemo hydra git-gutter flyspell-correct-ivy flycheck-plantuml elscreen elpy el-get ein ddskk conda blackout avy-migemo atom-one-dark-theme amx all-the-icons-ivy-rich)))
+    (flycheck-plantuml plantuml-mode elpy ein python-mode yatex magit git-gutter avy-migemo flyspell-correct-ivy flycheck all-the-icons-ivy-rich ivy-dired-history counsel swiper ivy neotree elscreen undo-tree recentf-ext ddskk atom-one-dark-theme transient-dwim macrostep leaf-tree leaf-convert blackout el-get hydra leaf-keywords leaf)))
  '(show-paren-mode t)
  '(tab-width 4)
  '(tool-bar-mode nil)

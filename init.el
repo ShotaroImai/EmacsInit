@@ -28,6 +28,9 @@
 ;; </leaf-install-code>
 
 ;; ここにいっぱい設定を書く
+;; Emacs入門から始めるleaf.el入門
+;;https://qiita.com/conao3/items/347d7e472afd0c58fbd7
+;;にしたがった
 ;; <leaf-setting>
 (leaf leaf
   :config
@@ -37,7 +40,23 @@
     :custom ((imenu-list-size . 30)
              (imenu-list-position . 'left))))
 ;; </leaf-setting>
+(leaf macrostep
+  :ensure t
+  :bind (("C-c e" . macrostep-expand)))
 
+;; command menu
+(leaf transient-dwim
+  :doc "Useful preset transient commands"
+  :req "emacs-26.1" "transient-0.1"
+  :tag "tools" "emacs>=26.1"
+  :added "2020-05-03"
+  :url "https://github.com/conao3/transient-dwim.el"
+  :emacs>= 26.1
+  :ensure t
+  :bind (("M-=" . transient-dwim-dispatch)))
+
+
+;;<interfaceや使い勝手の向上>
 (leaf cus-start
   :doc "define customization properties of builtins"
   :tag "builtin" "internal"
@@ -45,27 +64,26 @@
   :bind
   ("C-t" . other-window)
   :init
-    (set-language-environment "Japanese") ; 言語環境を"japanese"に
-    (prefer-coding-system 'utf-8)
-;;    (define-key global-map (kbd "C-t") 'other-window) ; ウィンドウ切り替え
-    (setq-default indent-tabs-mode nil)
-    (setq initial-frame-alist
-          '((top . 80) (left . 60) (width . 160) (height . 40)))
-    (set-face-attribute 'default nil :family "Ricty Discord" :height 140)
-    (setq frame-title-format "%f")
+  ;; 言語環境を"japanese"に。LANG=en_USなので。
+  (set-language-environment "Japanese")
+  (prefer-coding-system 'utf-8)
+  (setq-default indent-tabs-mode nil)
+  (setq initial-frame-alist
+        '((top . 105) (left . 60) (width . 165) (height . 40)))
+  (set-face-attribute 'default nil :family "Ricty Discord" :height 140)
+  (setq frame-title-format "%f")
   :custom
-  `((tool-bar-mode . nil)
-    (inhibit-startup-message . t) ;; スタートメニュー消す
-    (transient-mark-mode . t)  ;;リージョンに色をつける
-    (make-backup-files . nil) ;; *.~ とかのバックアップファイルを作らない
-    (electric-pair-mode . t) ;;カッコ補完
-    (show-paren-mode . t) ;; 対応する括弧をハイライト
-    (tab-width . 4)
-    ;行番号出すEmacs 26からこれでいけるらしい
-    (global-display-line-numbers-mode . t)
-    (column-number-mode . t) ;; 列番号の表示
-    (line-number-mode . t) ;; 行番号の表示
-    )
+  (tool-bar-mode . nil)
+  (inhibit-startup-message . t) ;; スタートメニュー消す
+  (transient-mark-mode . t)  ;;リージョンに色をつける
+  (make-backup-files . nil) ;; *.~ とかのバックアップファイルを作らない
+  (electric-pair-mode . t) ;;カッコ補完
+  (show-paren-mode . t) ;; 対応する括弧をハイライト
+  (tab-width . 4)
+  ;;行番号出すEmacs 26からこれでいける
+  (global-display-line-numbers-mode . t)
+  (column-number-mode . t) ;; 列番号の表示
+  (line-number-mode . t) ;; 行番号の表示
   )
 
 (leaf atom-one-dark-theme
@@ -79,29 +97,24 @@
 
 (leaf ddskk
   :doc "Simplnne Kana to Kanji conversion program."
-;  :req "ccc-1.43" "cdb-20141201.754"
+;;  :req "ccc-1.43" "cdb-20141201.754"
   :require skk-study
   :added "2020-04-26"
   :ensure t
-;  :after ccc cdb
+;;  :after ccc cdb
   :bind
    (("C-\\" . skk-mode))
    ;;("\C-x\C-j" . skk-mode))
    :init
    (setq skk-jisyo-code 'utf-8)
-;;   (setq skk-user-directory "~/google/CorvusSKK/")
-   (setq skk-user-directory "~/.emacs.d/ddskk/")
-;;   (setq skk-init-file "~/google/CorvusSKK/init")
-;;   (setq skk-init-file "~/.emacs.d/ddskk/init")
-   (setq skk-jisyo "~/google/CorvusSKK/userdict.utf8")
-   (setq skk-large-jisyo "~/google/CorvusSKK/SKK-JISYO.utf8")
+   (setq skk-user-directory "~/google/ddskk/")
+   (setq skk-jisyo "~/google/ddskk/userdict.utf8")
+   (setq skk-large-jisyo "~/google/ddskk/SKK-JISYO.utf8")
    (setq default-input-method "japanese-skk")
-;;自動コンパイル
+   ;;自動コンパイル
    (setq skk-byte-compile-init-file t)
    :hook
    (skk-load-hook . (lambda() (require 'context-skk)))
-   ;; :config
-   ;; (add-to-list 'context-skk-programming-mode 'python-mode)
    :mode
    ("\\.py$" . context-skk-programming-mode)
    ("\\.pu$" . context-skk-programming-mode)
@@ -114,11 +127,8 @@
  :url "http://www.emacswiki.org/cgi-bin/wiki/download/recentf-ext.el"
  :ensure t
  ;; :init
- ;; (defun my/ido-recentf ()
- ;; (interactive)
- ;; (find-file (ido-completing-read "Find recent file: " recentf-list)))
  :bind
-;; ("C-x C-r" . counsel-recentf)
+ ;; counsel-recentfが何故か動かないので
  ("C-x C-r" . recentf-open-files)
  :config
  (recentf-mode t)
@@ -127,7 +137,6 @@
  (setq recentf-auto-cleanup 'never)
  ;; .recentf自体は含まない
  (setq recentf-exclude '("recentf"))
- (setq recentf-auto-save-timer (run-with-idle-timer 30 t 'recentf-save-list))
  )
 
 (leaf undo-tree
@@ -140,7 +149,6 @@
   :bind
   ("M-/" . undo-tree-redo)
   :custom
-;  :init
   ;; undo-tree を起動時に有効にする
   (global-undo-tree-mode . t)
   )
@@ -193,6 +201,7 @@
   ;; 隠しファイルをデフォルトで表示
   (setq neo-show-hidden-files t)
   )
+;;</interface>
 
 ;;<ivy/counsel>
 (leaf ivy
@@ -256,6 +265,7 @@
   :bind
   ("M-x" . counsel-M-x)
   ("M-y" . counsel-yank-pop)
+  ;;counsel-recentfが動かない
 ;;  ("C-x C-r" . counsel-recentf)
   ("C-x C-b" . counsel-ibuffer)
   ("C-c g" . counsel-git)
@@ -272,10 +282,9 @@
   :url "https://github.com/jixiuf/ivy-dired-history"
   :ensure t
   :after ivy counsel
-  ;; :bind
-  ;; (";" . dired)
+  :bind
+;;  (dired-mode-map ("," 'dired))
   :config
-  (define-key dired-mode-map "," 'dired)
   (with-eval-after-load "session"
     (add-to-list 'session-globals-include 'ivy-dired-history-variable))
   )
@@ -304,7 +313,8 @@
   :emacs>= 24.5
   :ensure t
   :after ivy
-  :init (ivy-rich-mode 1)
+  :init
+  (ivy-rich-mode 1)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   )
 ;; </ivy/counsel>
@@ -331,10 +341,13 @@
   :doc "On-the-fly spell checker"
   :tag "builtin"
   :added "2020-05-02"
-  :hook ((prog-mode . flyspell-prog-mode)    ;; flyspell-prog-modeはコメント領域だけ
+  :hook
+  ;; flyspell-prog-modeはコメント領域だけ
+  ((prog-mode . flyspell-prog-mode)
          (yatex-mode . flyspell-mode)
          (org-mode . flyspell-mode)
-         (text-mode . flyspell-mode))
+         (text-mode . flyspell-mode)
+         (python-mode . flyspell-mode))
 )
 
 (leaf ispell
@@ -382,7 +395,8 @@
   (setq migemo-user-dictionary nil)
   (setq migemo-regex-dictionary nil)
   (load-libray "migemo")
-  (migemo-init))
+  (migemo-init)
+  )
 
 (leaf avy-migemo
   :doc "avy with migemo"
@@ -424,7 +438,8 @@
   :ensure t
   :after git-commit with-editor
   :bind
-  (("C-x g" . magit-status))
+  ;;設定が効いてない。何故?
+  ("C-x g" . magit-status)
   :config
   ;; ファイル編集時に，bufferを再読込
   (global-auto-revert-mode 1)
@@ -468,22 +483,26 @@
 ;; ;;</tex>
 
 ;; ;;<python>
-;; (leaf ein
-;;   :doc "Emacs IPython Notebook"
-;;   :req "emacs-25" "websocket-20190620.338" "anaphora-20180618" "request-20200117.0" "deferred-0.5" "polymode-20190714.0" "dash-2.13.0"
-;;   :tag "emacs>=25"
-;;   :added "2020-05-03"
-;;   :emacs>= 25
-;;   :ensure t
-;;   :after websocket anaphora deferred polymode
-;;   :config
-;;   ;; Use IPython for REPL
-;;   ;; (setq python-shell-interpreter "jupyter"
-;;   ;;       python-shell-interpreter-args "console --simple-prompt"
-;;   ;;       python-shell-prompt-detect-failure-warning nil)
-;;   ;; (add-to-list 'python-shell-completion-native-disabled-interpreters
-;;   ;;              "jupyter")
-;;   )
+(leaf python-mode
+  :doc "Python major mode"
+  :added "2020-05-06"
+  :ensure t
+  :mode
+  ("\\.py\\'" . python-mode)
+  :interpreter
+  ("python" . python-mode)
+  ("python3" . python-mode)
+  )
+
+(leaf ein
+  :doc "Emacs IPython Notebook"
+  :req "emacs-25" "websocket-20190620.338" "anaphora-20180618" "request-20200117.0" "deferred-0.5" "polymode-20190714.0" "dash-2.13.0"
+  :tag "emacs>=25"
+  :added "2020-05-03"
+  :emacs>= 25
+  :ensure t
+  :after websocket anaphora deferred polymode
+  )
 
 (leaf elpy
   :doc "Emacs Python Development Environment"
@@ -494,18 +513,18 @@
   :ensure t
   :after company highlight-indentation pyvenv yasnippet
   :init
-;;  (elpy-enable)
-;;  (elpy-use-ipython)
-  (advice-add 'python-mode :before 'elpy-enable)
+  (elpy-enable)
   :config
-;;   ;;; 使用する Anaconda の仮想環境を設定
-;;   (defvar venv-default "~/anaconda3/envs/")
-;; ;;; デフォルト環境を有効化
-;;   (pyvenv-activate venv-default)
-;; ;;; REPL 環境に IPython を使う
-;;   (elpy-use-ipython)
-
-  ;; Enable Flycheck
+  ;; (setq python-shell-interpreter "python3"
+  ;;       python-shell-interpreter-args "-i")
+  (setq elpy-rpc-python-command "python3")
+  ;; Use Jupyter console
+  (setq python-shell-interpreter "jupyter"
+        python-shell-interpreter-args "console --simple-prompt"
+        python-shell-prompt-detect-failure-warning nil)
+  (add-to-list 'python-shell-completion-native-disabled-interpreters
+               "jupyter")
+  ;;  Enable Flycheck
   (when (require 'flycheck nil t)
     (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
     (add-hook 'elpy-mode-hook 'flycheck-mode))
@@ -515,26 +534,6 @@
     (add-hook 'elpy-mode-hook 'flycheck-mode))
   )
 
-;; (leaf conda
-;;   :doc "Work with your conda environments"
-;;   :req "emacs-24.4" "pythonic-0.1.0" "dash-2.13.0" "s-1.11.0" "f-0.18.2"
-;;   :tag "conda" "environment" "python" "emacs>=24.4"
-;;   :added "2020-05-06"
-;;   :url "http://github.com/necaris/conda.el"
-;;   :emacs>= 24.4
-;;   :ensure t
-;;   :after pythonic
-;;   :config
-;;   ;; if you want interactive shell support, include:
-;;   (conda-env-initialize-interactive-shells)
-;;   ;; if you want eshell support, include:
-;; ;;  (conda-env-initialize-eshell)
-;;   ;; if you want auto-activation (see below for details), include:
-;;   (conda-env-autoactivate-mode t)
-;;   (setq conda-anaconda-home (expand-file-name "~/anaconda3/"))
-;;   (setq conda-env-home-directory (expand-file-name "~/anaconda3/"))
-;;   (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format))
-;; )
 ;; ;;</python>
 
 ;; ;;<plantuml>
@@ -546,14 +545,14 @@
   :emacs>= 25.0
   :ensure t
   :config
-  (add-to-list 'auto-mode-alist '("\.pu$" . plantuml-mode))
+  (add-to-list 'auto-mode-alist '("\\.pu$" . plantuml-mode))
   (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
   (setq plantuml-default-exec-mode 'jar)
-;; javaにオプションを渡したい場合はここにかく
-;(setq plantuml-java-options "")
-;; plantumlのプレビューをsvg, pngにしたい場合はここをコメントイン
-;; デフォルトでアスキーアート
-;(setq plantuml-output-type "utxt")
+  ;; javaにオプションを渡したい場合はここにかく
+  ;;(setq plantuml-java-options "")
+  ;; plantumlのプレビューをsvg, pngにしたい場合はここをコメントイン
+  ;; デフォルトでアスキーアート
+  ;;(setq plantuml-output-type "utxt")
   ;; 日本語を含むUMLを書く場合はUTF-8を指定
   (setq plantuml-options "-charset UTF-8")
   )
@@ -588,18 +587,33 @@
    ("C-n" . company-select-next)
    ("C-p" . company-select-previous)
    ("C-s" . company-filter-candidates) ;; C-sで絞り込む
-   ("[tab]" . company-complete-selection) ;; TABで候補を設定
+;;   ("[tab]" . company-complete-selection) ;; TABで候補を設定
    ("C-f" . company-complete-selection) ;; C-fで候補を設定
+   ("<tab>" . company-indent-or-complete-common)
    )
   :config
-  (global-company-mode . t)
+  (global-company-mode)
   (setq company-transformers . company-sort-by-backend-importance)
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 3)
   (setq company-selection-wrap-around . t)
   (setq completion-ignore-case . t)
   (setq company-dabbrev-downcase . nil)
-)
+  ;; -や_などを含む語句も補完
+  (setq company-dabbrev-char-regexp "\\(\\sw\\|\\s_\\|_\\|-\\)")
+  (setq company-backends '((company-capf company-dabbrev)
+                           ;;company-bbdb
+                           ;;company-eclim
+                           company-semantic
+                           ;;company-clang
+                           ;;company-xcode
+                           ;;company-cmake
+                           company-files
+                           (company-dabbrev-code company-gtags
+                                                 company-etags company-keywords)
+                           ;;company-oddmuse
+                           ))
+  )
 ;; ;;</company>
 
 ;; <tabスペース削除>
@@ -617,17 +631,19 @@
   (global-whitespace-mode . t)))
 ;; </tabスペース削除>
 
-;; ;;<fish>
-(leaf fish-mode
-  :doc "Major mode for fish shell scripts"
-  :req "emacs-24"
-  :tag "shell" "fish" "emacs>=24"
-  :added "2020-05-06"
-  :emacs>= 24
-  :ensure t)
-;; ;;</fish>
+;; ;; ;;<fish>
+;; (leaf fish-mode
+;;   :doc "Major mode for fish shell scripts"
+;;   :req "emacs-24"
+;;   :tag "shell" "fish" "emacs>=24"
+;;   :added "2020-05-06"
+;;   :emacs>= 24
+;;   :ensure t)
+;; ;; ;;</fish>
 
 ;; ;;<文字コ-ド表示>
+;;モードラインの文字エンコーディング表示をわかりやすくする
+;;https://qiita.com/kai2nenobu/items/ddf94c0e5a36919bc6db
 (leaf cl-lib
   :doc "Common Lisp extensions for Emacs"
   :tag "builtin"
@@ -673,27 +689,13 @@
 )
 ;; ;;</文字コ-ド表示>
 
-
 ;; Prevent Inserting custom-variables by system
 (leaf cus-edit
   :doc "tools for customizing Emacs and Lisp packages"
   :tag "builtin" "faces" "help"
   :added "2020-04-26"
   :custom `((custom-file . ,(locate-user-emacs-file "custom.el"))))
-(leaf macrostep
-  :ensure t
-  :bind (("C-c e" . macrostep-expand)))
 
-;; command menu
-(leaf transient-dwim
-  :doc "Useful preset transient commands"
-  :req "emacs-26.1" "transient-0.1"
-  :tag "tools" "emacs>=26.1"
-  :added "2020-05-03"
-  :url "https://github.com/conao3/transient-dwim.el"
-  :emacs>= 26.1
-  :ensure t
-  :bind (("M-=" . transient-dwim-dispatch)))
 (provide 'init)
 ;; Local Variables:
 ;; indent-tabs-mode: nil
