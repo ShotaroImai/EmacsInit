@@ -5,11 +5,11 @@ leaf.elをつかった設定に書き換え中。
 ddskk, ivy/counselなど環境もかなり乗り換える。
 
 # 課題
-Pythonの環境を整備したい。Emacs上でJupyterって動かせないのだろうか?
-Anacondaで仮想環境をつかったりしたい。あとターミナルとか
+Pythonの環境を整備したい。elpyの使い方がいまいちわかっていない。
 
 ## magit
-C-x gでmagit-statusが動くようにしたはずが、動かない。
+C-x gでmagit-statusが動くようにしたはずが、動かない。←これはtransient-dwinのため?
+counsel-recentfが動いていない。
 
 ## init.elのエラー
 Warning (leaf): Error in `avy-migemo' block.  Error msg: Wrong type argument: symbolp, "avy-migemo-e.g.swiper"  
