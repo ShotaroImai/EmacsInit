@@ -110,6 +110,7 @@
    (setq skk-user-directory "~/google/ddskk/")
    (setq skk-jisyo "~/google/ddskk/userdict.utf8")
    (setq skk-large-jisyo "~/google/ddskk/SKK-JISYO.utf8")
+   (setq skk-record-file "~/google/ddskk/record")
    (setq default-input-method "japanese-skk")
    ;;自動コンパイル
    (setq skk-byte-compile-init-file t)
