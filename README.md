@@ -9,6 +9,7 @@ Pythonの環境を整備したい。elpyの使い方がいまいちわかって�
 
 ## magit
 C-x gでmagit-statusが動くようにしたはずが、動かない。←これはtransient-dwinのため?
+
 counsel-recentfが動いていない。
 
 ## init.elのエラー
