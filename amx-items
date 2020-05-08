@@ -1,0 +1,18 @@
+
+;; ----- amx-history -----
+(
+ leaf-convert-insert-template
+ skk-mode
+ leaf-tree-mode
+ cd
+ 5x5
+ amx
+ arp
+)
+
+;; ----- amx-data -----
+(
+ (leaf-tree-mode . 1)
+ (skk-mode . 1)
+ (leaf-convert-insert-template . 2)
+)
