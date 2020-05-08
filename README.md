@@ -13,4 +13,5 @@ C-x gでmagit-statusが動くようにしたはずが、動かない。
 
 ## init.elのエラー
 Warning (leaf): Error in `avy-migemo' block.  Error msg: Wrong type argument: symbolp, "avy-migemo-e.g.swiper"  
+
 Warning (leaf): Error in `company' block.  Error msg: Wrong type argument: listp, company-sort-by-backend-importance
