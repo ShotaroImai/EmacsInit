@@ -106,6 +106,7 @@
    (("C-\\" . skk-mode))
    ;;("\C-x\C-j" . skk-mode))
    :init
+   (setq skk-preload t)
    (setq skk-jisyo-code 'utf-8)
    (setq skk-user-directory "~/google/ddskk/")
    (setq skk-jisyo "~/google/ddskk/userdict.utf8")
@@ -119,6 +120,12 @@
    :mode
    ("\\.py$" . context-skk-programming-mode)
    ("\\.pu$" . context-skk-programming-mode)
+   :config
+   (setq skk-use-auto-kutouten t
+         skk-show-icon t
+         skk-japanese-message-and-error t
+         skk-version-codename-ja t
+         )
    )
 
 (leaf recentf-ext
