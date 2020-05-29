@@ -125,7 +125,7 @@
          skk-show-icon t
          skk-japanese-message-and-error t
          skk-version-codename-ja t
-         )
+         skk-auto-paren-string-alist t)
    )
 
 (leaf recentf-ext
@@ -137,7 +137,7 @@
  ;; :init
  :bind
  ;; counsel-recentfが何故か動かないので
- ("C-x C-r" . recentf-open-files)
+;; ("C-x C-r" . recentf-open-files)
  :config
  (recentf-mode t)
  (setq recentf-max-saved-items 200)
@@ -274,7 +274,7 @@
   ("M-x" . counsel-M-x)
   ("M-y" . counsel-yank-pop)
   ;;counsel-recentfが動かない
-;;  ("C-x C-r" . counsel-recentf)
+  ("C-x C-r" . counsel-recentf)
   ("C-x C-b" . counsel-ibuffer)
   ("C-c g" . counsel-git)
   ("C-x C-f" . counsel-find-file)
@@ -648,6 +648,21 @@
 ;;   :emacs>= 24
 ;;   :ensure t)
 ;; ;; ;;</fish>
+
+;;<timestamp>
+(leaf time-stamp
+  :doc "Maintain last change time stamps in files edited by Emacs"
+  :tag "builtin"
+  :added "2020-05-11"
+  :config
+  (add-hook 'before-save-hook 'time-stamp)
+  (setq time-stamp-active t)
+  (setq time-stamp-start "[lL]ast[ -][uU]pdate:<")
+  ;;西暦-月-日@時刻(24時間表示)JST(タイムゾーン) by user
+  (setq time-stamp-format "%04y-%02m-%02d@%02H:%02M%Z by %u")
+  (setq time-stamp-end ">")
+  (setq time-stamp-line-limit 10)
+  )
 
 ;; ;;<文字コ-ド表示>
 ;;モードラインの文字エンコーディング表示をわかりやすくする
