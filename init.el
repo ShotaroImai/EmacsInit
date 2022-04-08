@@ -65,12 +65,13 @@
   ("C-t" . other-window)
   :init
   ;; 言語環境を"japanese"に。LANG=en_USなので。
-  (set-language-environment "Japanese")
+;  (set-language-environment "Japanese")
   (prefer-coding-system 'utf-8)
   (setq-default indent-tabs-mode nil)
   (setq initial-frame-alist
-        '((top . 105) (left . 60) (width . 165) (height . 40)))
-  (set-face-attribute 'default nil :family "Ricty Discord" :height 140)
+        '((top . 105) (left . 60) (width . 165) (height . 35)))
+;  (set-face-attribute 'default nil :family "Ricty Discord" :height 140)
+  (set-face-attribute 'default nil :family "HackGen Console" :height 140)
   (setq frame-title-format "%f")
   :custom
   (tool-bar-mode . nil)
@@ -127,6 +128,27 @@
          skk-version-codename-ja t
          skk-auto-paren-string-alist t)
    )
+
+;; (leaf uim
+;; ;  :ensure t
+;; ;  :el-get uim/uim
+;;   :tag "buildin"
+;;   :added "2020-04-27"
+;;   :bind
+;;   ("C-\\" . uim-mode)
+;;   :init
+;;   (setq uim-default-im-engine "skk")
+;;   (setq default-input-method "japanese-skk-uim")
+;;   (setq uim-default-im-prop
+;;         '("action_skk_hiragana"))
+;; ;  :config
+;;   ;; ;; Set UTF-8 as preferred character encoding (default is euc-jp).
+;;   )
+;;   ;; (setq uim-lang-code-alist
+;;   ;;       (cons '("Japanese" "Japanese" utf-8 "UTF-8")
+;;   ;;             (delete (assoc "Japanese" uim-lang-code-alist)
+;;   ;;                     uim-lang-code-alist)))
+;;   ;; )
 
 (leaf recentf-ext
  :doc "Recentf extensions"
